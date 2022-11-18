@@ -89,7 +89,7 @@ class OnvifClass():
     
     def setupOnvifCamera(self, ipAddress, port, id, pw):
         try:
-            self.mycam = ONVIFCamera(ipAddress, port, id, pw)
+            self.mycam = ONVIFCamera(ipAddress, port, id, pw, wsdl_dir="./wsdl")
             # Alternative Request for SOAP onvif operation
             self.onvifRequest = OnvifRequest(id, pw) 
             self.isOnvifCamera = True
