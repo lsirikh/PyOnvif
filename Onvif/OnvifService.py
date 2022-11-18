@@ -664,26 +664,26 @@ class OnvifClass():
     def zeep_pythonvalue(self, xmlvalue):
         return xmlvalue
 
-    def focusIn_pressDown(self):
+    def focusIn_pressDown(self, speed = 0.5):
         try:
             # Start continuous move
             if self.__onvifFocusProtocol:
-                self.request_focus_continuousMove.Focus['Continuous']['Speed'] = 0.5
+                self.request_focus_continuousMove.Focus['Continuous']['Speed'] = speed
                 self.imaging.Move(self.request_focus_continuousMove)
             else:
-                self.request_focus_continuousMove.Focus.Continuous.Speed = 0.5
+                self.request_focus_continuousMove.Focus.Continuous.Speed = speed
                 self.onvifRequest.focusContinuousMove(self.request_focus_continuousMove)
         except Exception as e:
             print("Raised Exception in focusIn_pressDown : ", e)
     
-    def focusOut_pressDown(self):
+    def focusOut_pressDown(self, speed = -0.5):
         try:
             # Start continuous move
             if self.__onvifFocusProtocol:
-                self.request_focus_continuousMove.Focus['Continuous']['Speed'] = -0.5
+                self.request_focus_continuousMove.Focus['Continuous']['Speed'] = speed
                 self.imaging.Move(self.request_focus_continuousMove)
             else:
-                self.request_focus_continuousMove.Focus.Continuous.Speed = -0.5
+                self.request_focus_continuousMove.Focus.Continuous.Speed = speed
                 self.onvifRequest.focusContinuousMove(self.request_focus_continuousMove)
         except Exception as e:
             print("Raised Exception in focusOut_pressDown : ", e)
@@ -698,11 +698,11 @@ class OnvifClass():
         except Exception as e:
             print("Raised Exception in focus_btnReleased : ", e)
             
-    def moveUp_pressDown(self):
+    def moveUp_pressDown(self, speed = 1):
         try:
             self.request_ptz_continuousMove.Velocity.Zoom.x = 0
             self.request_ptz_continuousMove.Velocity.PanTilt.x = 0
-            self.request_ptz_continuousMove.Velocity.PanTilt.y = self.YMAX
+            self.request_ptz_continuousMove.Velocity.PanTilt.y = speed
             # Start continuous move
             if self.__onvifPtzProtocol:
                 self.ptz.ContinuousMove(self.request_ptz_continuousMove)
@@ -712,11 +712,11 @@ class OnvifClass():
             print("Raised Exception in moveUp_pressDonw : ", e)
             
         
-    def moveDown_pressDown(self):
+    def moveDown_pressDown(self, speed = -1):
         try:
             self.request_ptz_continuousMove.Velocity.Zoom.x = 0
             self.request_ptz_continuousMove.Velocity.PanTilt.x = 0
-            self.request_ptz_continuousMove.Velocity.PanTilt.y = self.YMIN
+            self.request_ptz_continuousMove.Velocity.PanTilt.y = speed
             # Start continuous move
             if self.__onvifPtzProtocol:
                 self.ptz.ContinuousMove(self.request_ptz_continuousMove)
@@ -727,10 +727,10 @@ class OnvifClass():
             print("Raised Exception in moveDown_pressDown : ", e)
             
     
-    def moveRight_pressDown(self):
+    def moveRight_pressDown(self, speed = 1):
         try:
             self.request_ptz_continuousMove.Velocity.Zoom.x = 0
-            self.request_ptz_continuousMove.Velocity.PanTilt.x = self.XMAX
+            self.request_ptz_continuousMove.Velocity.PanTilt.x = speed
             self.request_ptz_continuousMove.Velocity.PanTilt.y = 0
             # Start continuous move
             if self.__onvifPtzProtocol:
@@ -741,10 +741,10 @@ class OnvifClass():
             print("Raised Exception in moveRight_pressDonw : ", e)
             
     
-    def moveLeft_pressDown(self):
+    def moveLeft_pressDown(self, speed = -1):
         try:
             self.request_ptz_continuousMove.Velocity.Zoom.x = 0
-            self.request_ptz_continuousMove.Velocity.PanTilt.x = self.XMIN
+            self.request_ptz_continuousMove.Velocity.PanTilt.x = speed
             self.request_ptz_continuousMove.Velocity.PanTilt.y = 0
             # Start continuous move
             if self.__onvifPtzProtocol:
@@ -755,9 +755,9 @@ class OnvifClass():
             print("Raised Exception in moveLeft_pressDonw : ", e)
             
     
-    def zoomOut_pressDown(self):
+    def zoomOut_pressDown(self, speed = -1):
         try:
-            self.request_ptz_continuousMove.Velocity.Zoom.x = -1
+            self.request_ptz_continuousMove.Velocity.Zoom.x = speed
             self.request_ptz_continuousMove.Velocity.PanTilt.x = 0
             self.request_ptz_continuousMove.Velocity.PanTilt.y = 0
             # Start continuous move
@@ -769,9 +769,9 @@ class OnvifClass():
             print("Raised Exception in zoomOut_pressDown : ", e)
             
         
-    def zoomIn_pressDown(self):
+    def zoomIn_pressDown(self, speed = 1):
         try:
-            self.request_ptz_continuousMove.Velocity.Zoom.x = 1
+            self.request_ptz_continuousMove.Velocity.Zoom.x = speed
             self.request_ptz_continuousMove.Velocity.PanTilt.x = 0
             self.request_ptz_continuousMove.Velocity.PanTilt.y = 0
             # Start continuous move
